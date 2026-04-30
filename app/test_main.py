@@ -29,3 +29,20 @@ def test_all_boundary_ages(
         get_human_age(cat_age, dog_age) == result
     ), (f"{cat_age} cat years, should be {result[0]} human years, "
         f"{dog_age} dog years should be {result[1]} human years.")
+
+
+@pytest.mark.parametrize(
+    "cat_age,dog_age",
+    [
+        ("15", 0),
+        (0, "15"),
+        (None, 0),
+        (0, None)
+    ]
+)
+def test_invalid_data(
+    cat_age: int,
+    dog_age: int
+) -> None:
+    with pytest.raises(TypeError):
+        get_human_age(cat_age, dog_age)
